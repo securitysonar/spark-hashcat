@@ -1,6 +1,6 @@
 ## 🚀 Spark-Hashcat: Grace Blackwell Forensic API
 
-A high-performance, containerized Hashcat API engineered specifically for NVIDIA Grace Blackwell (GB10) systems on ARM64 (SBSA) architecture.
+A high-performance, containerized Hashcat API engineered specifically for the NVIDIA DGX Spark or equivalent (Dell, HP, Asus) workstations powered by the Nvidia GB10 Grace Blackwell superchip, designed for AI development.
 
 ### 📋 Overview
 
@@ -8,7 +8,7 @@ This project provides a production-ready RESTful API wrapper around Hashcat, opt
 
 #### 🛡 Strategic Advantages
 
-**Blackwell Native:**Explicitly maps the NVRTC (Real-Time Compiler) to bypass OpenCL fallbacks, unlocking native CUDA performance.
+**Blackwell Native:** Explicitly maps the NVRTC (Real-Time Compiler) to bypass OpenCL fallbacks, unlocking native CUDA performance.
 
 **Unified Memory Mastery:** Leverages the 121GB+ shared memory space for memory-hard algorithms like Argon2id and Scrypt.
 
