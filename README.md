@@ -1,5 +1,6 @@
 ## 🚀 Spark-Hashcat: Grace Blackwell Forensic API
 
+A high-performance, containerized Hashcat API engineered specifically for the NVIDIA DGX Spark (or equivalent Dell Pro Max, or Asus Ascent) workstations powered by the Nvidia GB10 Grace Blackwell superchip, designed for AI development.
 ------
 
 ### ⚖️ Legal Disclaimer
@@ -20,8 +21,6 @@ The author(s) and contributors assume **no liability** for any misuse, damage, o
 **If you do not agree to these terms, do not use this software.**
 
 ------
-
-A high-performance, containerized Hashcat API engineered specifically for the NVIDIA DGX Spark (or equivalent Dell Pro Max, or Asus Ascent) workstations powered by the Nvidia GB10 Grace Blackwell superchip, designed for AI development.
 
 ### 📋 Overview
 
