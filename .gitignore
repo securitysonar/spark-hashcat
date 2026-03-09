@@ -1,0 +1,11 @@
+# Data folders
+data/hashes/*
+data/wordlists/*
+output/*
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Local env
+.env

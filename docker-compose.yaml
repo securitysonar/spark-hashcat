@@ -1,0 +1,52 @@
+services:
+  traefik:
+    image: traefik:v3.6.1
+    container_name: traefik-gateway
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    environment:
+      - DOCKER_API_VERSION=1.44
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  hashcat-api:
+    build: .
+    image: spark-hashcat:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              # Blackwell requires both 'compute' and 'utility' 
+              capabilities: [gpu, compute, utility]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hashcat.rule=Host(`forensics.spark.local`)"
+      - "traefik.http.routers.hashcat.entrypoints=web"
+      - "traefik.http.services.hashcat.loadbalancer.server.port=8000"
+    volumes:
+      - ./evidence:/hashes
+      - ./wordlists:/wordlists
+      - ./output:/output
+      # CRITICAL: Mount the Spark's ARM64/SBSA libraries into the container
+      - /usr/local/cuda/targets/sbsa-linux/lib:/usr/local/cuda/targets/sbsa-linux/lib:ro
+    healthcheck:
+      # We check the local status endpoint
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s # Gives the Blackwell GPU time to initialize
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      # Now that the file is mounted, we can preload it
+      - LD_PRELOAD=/usr/local/cuda/targets/sbsa-linux/lib/libnvrtc.so
+      - LD_LIBRARY_PATH=/usr/local/cuda/targets/sbsa-linux/lib:/usr/local/nvidia/lib:/usr/lib/aarch64-linux-gnu

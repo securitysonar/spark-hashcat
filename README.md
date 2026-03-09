@@ -45,7 +45,7 @@ spark-hashcat/
 #### 2. Deployment
 
 ```
-# Clone the Security Sonar repository
+# On your DGX Spark clone the Security Sonar repository
 git clone https://github.com/securitysonar/spark-hashcat.git
 cd spark-hashcat
 
@@ -70,6 +70,15 @@ curl -X POST http://localhost/crack \
          }'
 ```
 
+```
+
+{"job_id":"<your-job-id>","status":"Queued"}
+```
+#### 4. Usage: Wait 30 Seconds and Check the Status of the Job
+```
+curl -H "Host: forensics.spark.local" http://localhost/status/<insert-your-job-id>
+
+```
 ------
 
 ### 📊 Performance Benchmark (GB10)
