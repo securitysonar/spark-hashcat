@@ -108,10 +108,10 @@ curl -H "Host: forensics.spark.local" http://localhost/status/<insert-your-job-i
 
 | **Algorithm**     | **Mode** | **Blackwell Native Speed** | **Notes**                |
 | ----------------- | -------- | -------------------------- | ------------------------ |
-| **MD5**           | 0        | ~110.5 GH/s                | Raw Compute Throughput   |
-| **NTLM**          | 1000     | ~185.2 GH/s                | Enterprise Recovery      |
-| **iTunes Backup** | 14700    | ~165.4 kH/s                | High-Iteration PBKDF2    |
-| **Argon2id**      | 22500    | 121GB VRAM                 | Unified Memory Advantage |
+| **MD5**           | 0        | 79610.4 MH/s               | Raw Compute Throughput   |
+| **NTLM**          | 1000     | 75717.8 MH/s               | < Day for 9 Characters   |
+| **Bitlocker**     | 22100    | 3095 H/s                   | 3 Guess Per Second Limit |
+| **Apple Keychain**| 23100    | 3340.8 kH/s                | Quite Vulnerable         |
 
 ------
 

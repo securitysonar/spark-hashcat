@@ -32,8 +32,8 @@ services:
       - "traefik.http.routers.hashcat.entrypoints=web"
       - "traefik.http.services.hashcat.loadbalancer.server.port=8000"
     volumes:
-      - ./evidence:/hashes
-      - ./wordlists:/wordlists
+      - ./data/hashes:/hashes
+      - ./data/wordlists:/wordlists
       - ./output:/output
       # CRITICAL: Mount the Spark's ARM64/SBSA libraries into the container
       - /usr/local/cuda/targets/sbsa-linux/lib:/usr/local/cuda/targets/sbsa-linux/lib:ro
