@@ -1,3 +1,5 @@
+ ![NVIDIA](https://img.shields.io/badge/NVIDIA-GB10_Grace_Blackwell-76B900?logo=nvidia&logoColor=white)
+
 ## 🚀 Spark-Hashcat: Grace Blackwell Forensic API
 
 ------
