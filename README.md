@@ -1,5 +1,26 @@
 ## 🚀 Spark-Hashcat: Grace Blackwell Forensic API
 
+------
+
+### ⚖️ Legal Disclaimer
+
+**This software is intended for lawful purposes only.**
+
+Use of this tool is strictly limited to authorized activities, including but not limited to:
+
+- **Digital forensics investigations** conducted by law enforcement or licensed forensic examiners with proper legal authority.
+- **Penetration testing and security assessments** performed with explicit written authorization from the system or data owner.
+- **Recovery of your own passwords or data** where you have legal ownership or authorization.
+- **Academic research and education** in controlled, isolated environments.
+
+**Unauthorized use of this tool to access, crack, or recover credentials belonging to others without explicit permission is illegal** and may violate laws including, but not limited to, the Computer Fraud and Abuse Act (CFAA), the UK Computer Misuse Act, the EU Directive on Attacks Against Information Systems, and equivalent legislation in your jurisdiction.
+
+The author(s) and contributors assume **no liability** for any misuse, damage, or illegal activity arising from the use of this software. By using this software, you agree that you are solely responsible for ensuring your use complies with all applicable local, state, national, and international laws and regulations.
+
+**If you do not agree to these terms, do not use this software.**
+
+------
+
 A high-performance, containerized Hashcat API engineered specifically for the NVIDIA DGX Spark (or equivalent Dell Pro Max, or Asus Ascent) workstations powered by the Nvidia GB10 Grace Blackwell superchip, designed for AI development.
 
 ### 📋 Overview
@@ -104,7 +125,7 @@ One of the primary challenges with containerized Blackwell environments is the i
 
 ### 👤 Author
 
-**Peter Campbell** 
+**Peter Campbell CISSP, CEH** 
 
 *Platform Security Engineer | NVIDIA-Certified Professional (NCP-AIN + NCP-ADS)*
 
