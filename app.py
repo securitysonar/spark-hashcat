@@ -41,9 +41,9 @@ def run_hashcat(job_id: str, mode: int, hash_file: str, wordlist: str):
         "--quiet", 
         "--outfile", output_path,
         "--potfile-disable",
-        "--backend-ignore-opencl", # Kill the OpenCL error
-        "--notools", # Stops the NVML "Not Supported" noise
-        "--force" # Keep this to bypass the remaining driver warnings
+        "--backend-ignore-opencl",
+        "--hwmon-disable",       # Updated flag for stable v7.1.2
+        "--optimized-kernel-enable"
     ]
     
     try:    
