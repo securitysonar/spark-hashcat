@@ -36,8 +36,8 @@ def run_hashcat(job_id: str, mode: int, hash_file: str, wordlist: str):
     cmd = [
         executable, 
         "-m", str(mode), 
-        f"/data/hashes/{hash_file}", 
-        f"/data/wordlists/{wordlist}",
+        f"/hashes/{hash_file}", 
+        f"/wordlists/{wordlist}",
         "--quiet", 
         "--outfile", output_path,
         "--potfile-disable",
@@ -57,7 +57,7 @@ def run_hashcat(job_id: str, mode: int, hash_file: str, wordlist: str):
 async def start_crack(job: HashcatJob, background_tasks: BackgroundTasks):
     job_id = str(uuid.uuid4())
     # Verify file existence before starting
-    if not os.path.exists(f"/data/hashes/{job.hash_file}"):
+    if not os.path.exists(f"/hashes/{job.hash_file}"):
         raise HTTPException(status_code=400, detail="Hash file not found")
         
     background_tasks.add_task(run_hashcat, job_id, job.hash_type, job.hash_file, job.wordlist)
