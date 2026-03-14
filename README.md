@@ -124,10 +124,22 @@ curl -X POST http://localhost/crack \
 {"job_id":"<your-job-id>","status":"Queued"}
 ```
 
-#### 4. Usage: Wait 30 Seconds and Check the Status of the Job
+#### 4. Usage: Check the Status and Duration of the Job
+
+Poll the status endpoint with your job ID. Once complete, the response includes `started_at` (Unix timestamp) and `duration_seconds`:
+
 ```
 curl http://localhost/status/<insert-your-job-id>
+```
 
+**Example response (running):**
+```json
+{"job_id":"<your-job-id>","status":"Running","started_at":1741910400.5}
+```
+
+**Example response (completed):**
+```json
+{"job_id":"<your-job-id>","status":"Completed","started_at":1741910400.5,"duration_seconds":142.37}
 ```
 ------
 

@@ -1,6 +1,7 @@
 import subprocess
 import uuid
 import os
+import time
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 
@@ -52,11 +53,14 @@ def run_hashcat(job_id: str, hash_type: int, attack_mode: int, hash_file: str, w
         cmd.append(mask)
 
     try:
-        jobs[job_id] = "Running"
+        start = time.time()
+        jobs[job_id] = {"status": "Running", "started_at": start}
         subprocess.run(cmd, check=True, env=env)
-        jobs[job_id] = "Completed"
+        duration = time.time() - start
+        jobs[job_id] = {"status": "Completed", "started_at": start, "duration_seconds": round(duration, 2)}
     except subprocess.CalledProcessError:
-        jobs[job_id] = "Failed"
+        duration = time.time() - start
+        jobs[job_id] = {"status": "Failed", "started_at": start, "duration_seconds": round(duration, 2)}
 
 @app.post("/crack", status_code=202)
 async def start_crack(job: HashcatJob, background_tasks: BackgroundTasks):
@@ -76,8 +80,10 @@ async def start_crack(job: HashcatJob, background_tasks: BackgroundTasks):
 
 @app.get("/status/{job_id}")
 async def get_status(job_id: str):
-    status = jobs.get(job_id, "Not Found")
-    return {"job_id": job_id, "status": status}
+    job = jobs.get(job_id)
+    if job is None:
+        return {"job_id": job_id, "status": "Not Found"}
+    return {"job_id": job_id, **job}
 
 @app.get("/status/health")
 async def health_check():
