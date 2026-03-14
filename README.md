@@ -1,4 +1,5 @@
  ![NVIDIA](https://img.shields.io/badge/NVIDIA-GB10_Grace_Blackwell-76B900?logo=nvidia&logoColor=white)
+ ![CUDA Version](https://img.shields.io/badge/CUDA-13.0-green?logo=nvidia&logoColor=white)
 
 ## 🚀 Spark-Hashcat: Grace Blackwell Forensic API
 
@@ -83,25 +84,49 @@ docker compose up -d --build
 
 #### 3. Usage: Submitting a Forensic Job
 
-Submit an iTunes Backup (Mode 14700) crack request via `curl`:
+The `/crack` endpoint accepts the following fields:
+
+| Field         | Type    | Required             | Description                                         |
+| ------------- | ------- | -------------------- | --------------------------------------------------- |
+| `hash_type`   | integer | Yes                  | Hashcat hash mode (e.g. `1000` for NTLM)            |
+| `attack_mode` | integer | No (default: `0`)    | `0` = Dictionary, `3` = Brute Force / Mask          |
+| `hash_file`   | string  | Yes                  | Filename in the `/hashes` volume                    |
+| `wordlist`    | string  | Required if mode `0` | Filename in the `/wordlists` volume                 |
+| `mask`        | string  | Required if mode `3` | Hashcat mask (e.g. `?u?l?l?l?d?d`)                  |
+
+**Dictionary Attack (mode 0)** — Submit an iTunes Backup (Mode 14700) crack request via `curl`:
 
 ```
 curl -X POST http://localhost/crack \
      -H "Content-Type: application/json" \
      -d '{
            "hash_type": 14700,
+           "attack_mode": 0,
            "hash_file": "iphone_backup.txt",
            "wordlist": "rockyou.txt"
          }'
 ```
 
+**Brute Force / Mask Attack (mode 3)** — Target NTLM hashes with a known pattern (e.g. one uppercase, four lowercase, two digits):
+
+```
+curl -X POST http://localhost/crack \
+     -H "Content-Type: application/json" \
+     -d '{
+           "hash_type": 1000,
+           "attack_mode": 3,
+           "hash_file": "ntlm_hashes.txt",
+           "mask": "?u?l?l?l?d?d"
+         }'
 ```
 
+```
 {"job_id":"<your-job-id>","status":"Queued"}
 ```
+
 #### 4. Usage: Wait 30 Seconds and Check the Status of the Job
 ```
-curl -H "Host: forensics.spark.local" http://localhost/status/<insert-your-job-id>
+curl http://localhost/status/<insert-your-job-id>
 
 ```
 ------
@@ -132,6 +157,7 @@ One of the primary challenges with containerized Blackwell environments is the i
 **Peter Campbell CISSP, CEH** 
 
 *Platform Security Engineer | NVIDIA-Certified Professional (NCP-AIN + NCP-ADS)*
+*Security Sonar Research*
 
- [SecuritySonar.com](https://securitysonar.com)
+[SecuritySonar.com](https://securitysonar.com)
 
