@@ -42,7 +42,8 @@ def run_hashcat(job_id: str, hash_type: int, attack_mode: int, hash_file: str, w
         "--potfile-disable",
         "--backend-ignore-opencl",
         "--hwmon-disable",
-        "--optimized-kernel-enable"
+        "--optimized-kernel-enable",
+        "-w", "4"
     ]
 
     if attack_mode == 0:
