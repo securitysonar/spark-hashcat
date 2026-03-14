@@ -149,8 +149,8 @@ curl http://localhost/status/<insert-your-job-id>
 | ----------------- | -------- | -------------------------- | ------------------------ |
 | **MD5**           | 0        | 79610.4 MH/s               | Raw Compute Throughput   |
 | **NTLM**          | 1000     | 75717.8 MH/s               | < Day for 9 Characters   |
-| **Bitlocker**     | 22100    | 3095 H/s                   | 3 Guess Per Second Limit |
-| **Apple Keychain**| 23100    | 3340.8 kH/s                | Quite Vulnerable         |
+| **IOS 9 backup**  | 14700    | 3342.7 kH/s                | PBKDF2-HMAC-SHA1         |
+| **IOS 10> backup**| 14800    | 276 H/s                    | PBKDF2-HMAC-SHA256       |
 
 ------
 
