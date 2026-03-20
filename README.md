@@ -5,7 +5,7 @@
 
 ------
 
-**A high-performance, containerized Hashcat API engineered specifically for the NVIDIA DGX Spark (or equivalent Dell Pro Max, or Asus Ascent) workstations powered by the Nvidia GB10 Grace Blackwell superchip, designed for AI development.**
+**A high-performance, containerized Hashcat API engineered specifically for the NVIDIA DGX Spark (or compatible Grace Blackwell ARM64 host) workstations powered by the Nvidia GB10 Grace Blackwell superchip, designed for AI development.**
 
 ------
 
@@ -147,9 +147,9 @@ curl http://localhost/status/<insert-your-job-id>
 
 | **Algorithm**     | **Mode** | **Blackwell Native Speed** | **Notes**                |
 | ----------------- | -------- | -------------------------- | ------------------------ |
-| **MD5**           | 0        | 79610.4 MH/s               | Raw Compute Throughput   |
+| **MD5**           | 0        | 51531.2 MH/s               | Raw Compute Throughput   |
 | **NTLM**          | 1000     | 75717.8 MH/s               | < Day for 9 Characters   |
-| **IOS 9 backup**  | 14700    | 3342.7 kH/s                | PBKDF2-HMAC-SHA1         |
+| **IOS 9 backup**  | 14700    | 342.3 kH/s                 | PBKDF2-HMAC-SHA1         |
 | **IOS 10> backup**| 14800    | 276 H/s                    | PBKDF2-HMAC-SHA256       |
 
 ------
@@ -169,7 +169,7 @@ One of the primary challenges with containerized Blackwell environments is the i
 **Peter Campbell CISSP, CEH** 
 
 *Platform Security Engineer | NVIDIA-Certified Professional (NCP-AIN + NCP-ADS)*
-*Security Sonar Research*
 
+[Security Sonar on Medium](https://medium.com/security-sonar)
 [SecuritySonar.com](https://securitysonar.com)
 

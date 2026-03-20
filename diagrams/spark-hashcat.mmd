@@ -1,0 +1,48 @@
+---
+config:
+  layout: fixed
+  theme: default
+  look: neo
+---
+flowchart TB
+ subgraph Client["Client"]
+        C["HTTP Client (curl)"]
+  end
+ subgraph Traefik["Traefik Proxy :80"]
+        TR["Route: forensics.spark.local"]
+  end
+ subgraph API["hashcat-api :8000 (FastAPI)"]
+        EP1["POST /crack"]
+        EP2["GET /status/job_id"]
+        JOBS["Job Store"]
+        WORKER["Worker: run hashcat on GPU"]
+  end
+ subgraph Docker["Docker Stack"]
+        Traefik
+        API
+  end
+ subgraph GPU["NVIDIA DGX Spark GPU"]
+        CUDA["CUDA Backend"]
+  end
+ subgraph Volumes["Host Mounts"]
+        H["/hashes"]
+        W["/wordlists"]
+        O["/output"]
+  end
+    TR --> EP1 & EP2
+    EP1 -- schedule --> WORKER
+    WORKER -- reads --> H & W
+    H -- writes --> O
+    W -- writes --> O
+    WORKER -- status --> JOBS
+    EP2 -- lookup --> JOBS
+    WORKER -- compute --> CUDA
+    Client -- /status/id --> TR
+    C -- /crack --> TR
+    n1["Hashcat 7.1.2"]
+
+    n1@{ shape: text}
+    style n1 fill:#BBDEFB
+    style Docker fill:#757575,color:#fff
+    style GPU fill:#76b900,color:#fff
+    style Volumes fill:#757575,color:#fff
